@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Consulta de cliente</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="buscarCliente()" novalidate>
+    <!-- Tipo de documento -->
+    <div class="mb-3">
+      <label for="tipo" class="form-label">Tipo de documento</label>
+      <select
+        id="tipo"
+        formControlName="tipo"
+        class="form-select"
+        [ngClass]="{ 'is-invalid': campoInvalido('tipo') }"
+      >
+        <option value="" disabled>Seleccione...</option>
+        <option value="C">Cédula de ciudadanía</option>
+        <option value="P">Pasaporte</option>
+      </select>
+      <div class="invalid-feedback">
+        Seleccione un tipo de documento válido
+      </div>
+    </div>
+
+    <!-- Número de documento -->
+    <div class="mb-3">
+      <label for="numero" class="form-label">Número de documento</label>
+      <input
+        type="text"
+        id="numero"
+        formControlName="numero"
+        class="form-control"
+        placeholder="Ej: 1.234.567"
+        [ngClass]="{ 'is-invalid': campoInvalido('numero') }"
+        (input)="formatearNumero($event)"
+      />
+      <div class="invalid-feedback">
+        Ingrese de 8 a 11 dígitos numéricos
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <div class="d-grid">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="formulario.invalid"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal de Error -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="errorModalLabel">❌ Cliente no encontrado</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        El cliente no existe o los datos ingresados son incorrectos.<br />
+        Por favor verifica el tipo y número de documento.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

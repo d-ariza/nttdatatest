@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Resumen del Cliente</h2>
+
+  <!-- Estado de carga -->
+  <div *ngIf="cargando" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3">Cargando información...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!cargando && error" class="alert alert-danger">
+    No se encontró información del cliente. Por favor, realiza una nueva búsqueda.
+  </div>
+
+  <!-- Cliente cargado -->
+  <div *ngIf="!cargando && cliente">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="(cliente.primerNombre || '') + ' ' + (cliente.segundoNombre || '')"
+        disabled
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Apellido</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="(cliente.primerApellido || '') + ' ' + (cliente.segundoApellido || '')"
+        disabled
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Dirección</label>
+      <input type="text" class="form-control" [value]="cliente.direccion" disabled />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Teléfono</label>
+      <input type="text" class="form-control" [value]="cliente.telefono" disabled />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ciudad</label>
+      <input type="text" class="form-control" [value]="cliente.ciudad" disabled />
+    </div>
+  </div>
+
+  <!-- Botón volver -->
+  <div class="d-grid mt-4">
+    <button class="btn btn-secondary" (click)="volver()">Volver</button>
+  </div>
+</div>

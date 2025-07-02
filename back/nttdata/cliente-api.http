@@ -1,0 +1,18 @@
+### peubas para postman o cartero, o cliente http rest
+
+### Obtener cliente existente
+GET http://localhost:8090/api/clientes?tipo=C&numero=23445322
+Accept: application/json
+
+###
+
+### Intentar con cliente inexistente
+GET http://localhost:8090/api/clientes?tipo=C&numero=00000000
+Accept: application/json
+
+###
+
+### Error de parámetros vacíos
+GET http://localhost:8090/api/clientes
+Accept: application/json
+
